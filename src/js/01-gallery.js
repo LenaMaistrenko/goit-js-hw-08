@@ -19,7 +19,7 @@ function createMarkup(arr) {
 const imagesMarkup = createMarkup(galleryItems);
 galleryEl.insertAdjacentHTML('beforeend', imagesMarkup);
 
-let gallery = new SimpleLightbox('.gallery a', {
+new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionsDelay: 250,
 });
