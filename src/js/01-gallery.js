@@ -3,6 +3,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 // Add imports above this line
 import { galleryItems } from './gallery-items';
 // Change code below this line
+
 const galleryEl = document.querySelector('.gallery');
 
 function createMarkup(arr) {
@@ -30,4 +31,5 @@ new SimpleLightbox('.gallery a', {
 // });
 
 //console.log(galleryItems);
-console.log(galleryItems);
+console.log('hello');
+console.log('galleryItems', galleryItems);
