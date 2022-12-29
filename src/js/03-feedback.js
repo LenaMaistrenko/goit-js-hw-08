@@ -1,25 +1,35 @@
-console.log('contactFormEl');
+import throttle from 'lodash.throttle';
 const contactFormEl = document.querySelector('.feedback-form');
 
-const UserInfo = {};
-// const fillContactFormFields = () => {
-//   const userInfoFromLS = localStorageService.load('userData');
+const userInfo = JSON.parse(localStorage.getItem('feedback-form-state')) || {};
+fillForm();
+function fillForm() {
+  try {
+    const userInfoLS = JSON.parse(localStorage.getItem('feedback-form-state'));
+    console.log('userInfoLS', userInfoLS);
+    if (!userInfoLS) {
+      return;
+    }
+    for (const prop in userInfoLS) {
+      console.log('userInfoLS[prop]', userInfoLS[prop]);
+      contactFormEl.elements[prop].value = userInfoLS[prop];
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+contactFormEl.addEventListener('input', throttle(formChange, 500));
 
-//   if (userInfoFromLS === undefined) {
-//     return;
-//   }
-
-//   for (const prop in userInfoFromLS) {
-//     contactFormEl.elements[prop].value = userInfoFromLS[prop];
-//   }
-// };
-
-//fillContactFormFields();
-contactFormEl.addEventListener('change', formChange);
 function formChange(evt) {
   const { target } = evt;
-  console.log(target);
   const fieldName = target.name;
   const fieldValue = target.value;
-  console.log(fieldName, fieldValue);
+  userInfo[fieldName] = fieldValue;
+  localStorage.setItem('feedback-form-state', JSON.stringify(userInfo));
+}
+contactFormEl.addEventListener('submit', formSubmit);
+function formSubmit(evt) {
+  evt.preventDefault();
+  localStorage.removeItem('feedback-form-state');
+  contactFormEl.reset();
 }

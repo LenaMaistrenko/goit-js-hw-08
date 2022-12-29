@@ -24,12 +24,6 @@ new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionsDelay: 250,
 });
-// gallery.on('show.simplelightbox', function () {
-//   gallery.options.captionsData = 'alt';
-//   gallery.options.captionsDelay = 250;
-//   console.log(gallery.options);
-// });
 
-//console.log(galleryItems);
 console.log('hello');
 console.log('galleryItems', galleryItems);
